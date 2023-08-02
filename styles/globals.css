@@ -20,3 +20,19 @@ a {
 body {
   background-color: #F8F9FA;
 }
+
+.profilepic {
+  align-content: center;
+  justify-content: center;
+}
+
+.bio {
+ color: grey;
+}
+
+.profilepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
