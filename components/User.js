@@ -27,6 +27,6 @@ ShowUser.propTypes = {
     profile_image_url: PropTypes.string,
     email: PropTypes.string,
     created_on: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    uid: PropTypes.string,
   }).isRequired,
 };
