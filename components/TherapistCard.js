@@ -19,7 +19,7 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
         <Card.Title>{therapistObj.first_name} {therapistObj.last_name}</Card.Title>
         <h5>{therapistObj.city}, {therapistObj.state}</h5>
         <p>{therapistObj.description}</p>
-        <Link href={`/therapists/${therapistObj.first_name}-${therapistObj.last_name}`} passHref>
+        <Link href={`/therapists/${therapistObj.id}`} passHref>
           <Button variant="primary" className="m-2">Details</Button>
         </Link>
         <Link href={`/therapists/edit/${therapistObj.id}`} passHref>
