@@ -6,11 +6,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Form } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
-import { useAuth } from '../utils/context/authContext';
 
 function NavBar() {
-  const { user } = useAuth();
-
   return (
     <>
 
@@ -26,9 +23,6 @@ function NavBar() {
             >
               <Nav.Link href="/therapists">Therapists</Nav.Link>
               <Nav.Link href="/categories">Categories</Nav.Link>
-              {user.is_therapist === true ? (
-                <Nav.Link href="/therapists/new">Add Therapist Card</Nav.Link>
-              ) : null}
             </Nav>
             <Form className="d-flex">
               <Form.Control

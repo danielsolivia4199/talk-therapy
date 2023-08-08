@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getCategories } from '../api/categoryData';
 import { useAuth } from '../utils/context/authContext';
-// eslint-disable-next-line import/no-unresolved
-import CategoryCard from '../components/categoryCard';
+import CategoryCard from '../components/CategoryCard';
 
 // categories page
 function ShowCategories() {
