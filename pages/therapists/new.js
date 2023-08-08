@@ -1,6 +1,12 @@
-import React from 'react';
 import TherapistForm from '../../components/Forms/TherapistForm';
 
-export default function AddTherapist() {
-  return <TherapistForm />;
-}
+const NewTherapist = () => (
+  <div>
+    <h2 className="text-center" style={{ margin: '100px' }}>
+      Add A Therapist
+    </h2>
+    <TherapistForm />
+  </div>
+);
+
+export default NewTherapist;
