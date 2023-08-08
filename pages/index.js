@@ -1,26 +1,34 @@
-import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
-import { useAuth } from '../utils/context/authContext';
+// import { useState } from 'react';
 
 function Home() {
-  const { user } = useAuth();
+  // const [categories, setCategories] = useState([]);
+
+  // const getAllCategories = () => {
+  //   getCategories().then(setCategories);
+  // };
+
+  // useEffect(() => {
+  //   getAllCategories();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Your Bio: {user.bio}</p>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
-    </div>
+    <>
+      <div
+        className="text-center d-flex flex-column justify-content-center align-content-center"
+        style={{
+          margin: '0 auto',
+        }}
+      >
+        <img src="https://greenane.ie/wp-content/uploads/2021/08/Adolescent-Trauma.png" alt="therapy" />
+
+      </div>
+      {/* <div id="category-section" className="text-center my-4 d-flex">
+        {categories.map((category) => (
+          <CategoryCard key={category.id} id={category.id} label={category.label} categoryObj={category} onUpdate={getAllCategories} />
+        ))}
+      </div> */}
+    </>
   );
 }
 

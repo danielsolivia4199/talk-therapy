@@ -11,6 +11,7 @@ export default function ShowUser() {
     <div className="profilepage">
       <img src={user.profile_image_url} alt="user" width="100px" height="100px" />
       <h1>{user.first_name} {user.last_name}</h1>
+      <h3>{user.is_therapist === true ? 'Therapist' : 'User'}</h3>
       <h3 className="bio">{user.bio}</h3>
       <h2>Email: {user.email}</h2>
       <h2>Account Created On: {user.created_on}</h2>

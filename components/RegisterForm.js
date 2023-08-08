@@ -12,15 +12,20 @@ function RegisterForm({ user, updateUser }) {
     profile_image_url: '',
     email: '',
     active: true,
-    is_therapist: true,
+    is_therapist: false,
     uid: user.uid,
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const {
+      name, value, type, checked,
+    } = e.target;
+
+    const newValue = type === 'checkbox' ? checked : value;
+
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -97,6 +102,18 @@ function RegisterForm({ user, updateUser }) {
         />
       </Form.Group>
 
+      <div className="mb-4">
+        <Form.Check
+          className="text-grey mb-3"
+          type="switch"
+          id="is_therapist"
+          name="is_therapist"
+          label="Therapist"
+          onChange={handleInputChange}
+        />
+
+      </div>
+
       <Button variant="primary" type="submit" style={{ backgroundColor: '#003049', marginTop: '20px' }}>
         Register
       </Button>
@@ -107,6 +124,7 @@ function RegisterForm({ user, updateUser }) {
 RegisterForm.propTypes = {
   user: PropTypes.shape({
     uid: PropTypes.string.isRequired,
+    is_therapist: PropTypes.bool.isRequired,
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
 };

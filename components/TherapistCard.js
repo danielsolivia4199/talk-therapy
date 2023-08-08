@@ -22,12 +22,16 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
         <Link href={`/therapists/${therapistObj.id}`} passHref>
           <Button variant="primary" className="m-2">Details</Button>
         </Link>
-        <Link href={`/therapists/edit/${therapistObj.id}`} passHref>
-          <Button variant="info">Edit</Button>
-        </Link>
-        <Button variant="danger" onClick={deleteThisTherapist} className="m-2">
-          Delete
-        </Button>
+        {therapistObj.is_therapist === true ? (
+          <Link href={`/therapists/edit/${therapistObj.id}`} passHref>
+            <Button variant="info">Edit</Button>
+          </Link>
+        ) : null}
+        {therapistObj.is_therapist === true ? (
+          <Button variant="danger" onClick={deleteThisTherapist} className="m-2">
+            Delete
+          </Button>
+        ) : null}
       </Card.Body>
     </Card>
   );
@@ -45,6 +49,7 @@ TherapistCard.propTypes = {
     favorite: PropTypes.bool,
     city: PropTypes.string,
     state: PropTypes.string,
+    is_therapist: PropTypes.bool,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
