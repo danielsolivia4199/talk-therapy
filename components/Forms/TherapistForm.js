@@ -226,7 +226,8 @@ TherapistForm.propTypes = {
     favorite: PropTypes.bool,
     city: PropTypes.string,
     state: PropTypes.string,
-    category_id: PropTypes.objectOf(PropTypes.object()).isRequired,
+    category_id: PropTypes.string,
+    id: PropTypes.number,
   }),
 };
 
