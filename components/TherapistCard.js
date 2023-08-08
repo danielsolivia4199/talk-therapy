@@ -7,6 +7,10 @@ import Link from 'next/link';
 import { deleteTherapist } from '../api/therapistData';
 
 export default function TherapistCard({ therapistObj, onUpdate }) {
+  const addFavorite = () => {
+    // Implement your logic to mark therapist as favorite
+    console.log(`Marked ${therapistObj.first_name} ${therapistObj.last_name} as favorite`);
+  };
   const deleteThisTherapist = () => {
     if (window.confirm(`Delete ${therapistObj.first_name} ${therapistObj.last_name}?`)) {
       deleteTherapist(therapistObj.id).then(() => onUpdate());
@@ -16,7 +20,9 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
         <img src={therapistObj.profile_image_url} alt="user" width="100px" height="100px" />
-        <Card.Title>{therapistObj.first_name} {therapistObj.last_name}</Card.Title>
+        <Card.Title>{therapistObj.first_name} {therapistObj.last_name}{' '}
+          {therapistObj.favorite ? <span>&#9733;</span> : null}
+        </Card.Title>
         <h5>{therapistObj.city}, {therapistObj.state}</h5>
         <p>{therapistObj.description}</p>
         <Link href={`/therapists/${therapistObj.id}`} passHref>
@@ -32,6 +38,9 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
             Delete
           </Button>
         ) : null}
+        <Button variant={therapistObj.favorite ? 'success' : 'outline-success'} onClick={addFavorite}>
+          {therapistObj.favorite ? 'Favorited' : 'Favorite'}
+        </Button>
       </Card.Body>
     </Card>
   );
