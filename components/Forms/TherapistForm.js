@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { createTherapist, updateTherapist } from '../../api/therapistData';
 import { getCategories } from '../../api/categoryData';
+import { useAuth } from '../../utils/context/authContext';
 
 const initialTherapistState = {
   first_name: '',
@@ -23,6 +24,12 @@ const TherapistForm = ({ obj }) => {
   const [therapistCategories, setTherapistCategories] = useState([]);
   const [therapyFormInput, setTherapyFormInput] = useState(initialTherapistState);
   const router = useRouter();
+  const { user } = useAuth();
+  // const time = new Date().toLocaleString('en-US', {
+  //   year: 'numeric',
+  //   month: '2-digit',
+  //   day: '2-digit',
+  // });
 
   useEffect(() => {
     if (obj) {
@@ -44,7 +51,8 @@ const TherapistForm = ({ obj }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj) {
+    const currentDate = new Date().toISOString().split('T')[0];
+    if (obj.id) {
       const therapistUpdate = {
         id: therapyFormInput.id,
         first_name: therapyFormInput.first_name,
@@ -59,9 +67,10 @@ const TherapistForm = ({ obj }) => {
         category_id: Number(therapyFormInput.id),
       };
       updateTherapist(therapistUpdate)
-        .then(() => router.push(`/therpists/${obj}`));
+        .then(() => router.push('/therapists'));
     } else {
       const therapist = {
+        id: therapyFormInput.id,
         first_name: therapyFormInput.first_name,
         last_name: therapyFormInput.last_name,
         profile_image_url: therapyFormInput.profile_image_url,
@@ -71,11 +80,13 @@ const TherapistForm = ({ obj }) => {
         favorite: Boolean(therapyFormInput.favorite),
         city: therapyFormInput.city,
         state: therapyFormInput.state,
-        category_id: Number(therapyFormInput.id),
-        created_on: therapyFormInput.created_on,
+        category_id: therapyFormInput.category_id,
+        created_on: currentDate,
+        uid: user.uid,
       };
       createTherapist(therapist)
-        .then((newTherapist) => router.push(`/therapists/${newTherapist.id}`));
+        // eslint-disable-next-line no-unused-vars
+        .then(() => router.push('/therapists'));
     }
   };
 
@@ -165,7 +176,7 @@ const TherapistForm = ({ obj }) => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3">
+      {/* <Form.Group className="mb-3">
         <Form.Label>State</Form.Label>
         <Form.Control
           name="state"
@@ -173,7 +184,61 @@ const TherapistForm = ({ obj }) => {
           value={therapyFormInput.state}
           onChange={handleChange}
         />
-      </Form.Group>
+      </Form.Group> */}
+
+      <Form.Select aria-label="dropdown select">
+        <option>Choose A State</option>
+        <option value="AL">Alabama (AL)</option>
+        <option value="AK">Alaska (AK)</option>
+        <option value="AZ">Arizona (AZ)</option>
+        <option value="AR">Arkansas (AR)</option>
+        <option value="CA">California (CA)</option>
+        <option value="CO">Colorado (CO)</option>
+        <option value="CT">Connecticut (CT)</option>
+        <option value="DE">Delaware (DE)</option>
+        <option value="FL">Florida (FL)</option>
+        <option value="GA">Georgia (GA)</option>
+        <option value="HI">Hawaii (HI)</option>
+        <option value="ID">Idaho (ID)</option>
+        <option value="IL">Illinois (IL)</option>
+        <option value="IN">Indiana (IN)</option>
+        <option value="IA">Iowa (IA)</option>
+        <option value="KS">Kansas (KS)</option>
+        <option value="KY">Kentucky (KY)</option>
+        <option value="LA">Louisiana (LA)</option>
+        <option value="ME">Maine (ME)</option>
+        <option value="MD">Maryland (MD)</option>
+        <option value="MA">Massachusetts (MA)</option>
+        <option value="MI">Michigan (MI)</option>
+        <option value="MN">Minnesota (MN)</option>
+        <option value="MS">Mississippi (MS)</option>
+        <option value="MO">Missouri (MO)</option>
+        <option value="MT">Montana (MT)</option>
+        <option value="NE">Nebraska (NE)</option>
+        <option value="NV">Nevada (NV)</option>
+        <option value="NH">New Hampshire (NH)</option>
+        <option value="NJ">New Jersey (NJ)</option>
+        <option value="NM">New Mexico (NM)</option>
+        <option value="NY">New York (NY)</option>
+        <option value="NC">North Carolina (NC)</option>
+        <option value="ND">North Dakota (ND)</option>
+        <option value="OH">Ohio (OH)</option>
+        <option value="OK">Oklahoma (OK)</option>
+        <option value="OR">Oregon (OR)</option>
+        <option value="PA">Pennsylvania (PA)</option>
+        <option value="RI">Rhode Island (RI)</option>
+        <option value="SC">South Carolina (SC)</option>
+        <option value="SD">South Dakota (SD)</option>
+        <option value="TN">Tennessee (TN)</option>
+        <option value="TX">Texas (TX)</option>
+        <option value="UT">Utah (UT)</option>
+        <option value="VT">Vermont (VT)</option>
+        <option value="VA">Virginia (VA)</option>
+        <option value="WA">Washington (WA)</option>
+        <option value="WV">West Virginia (WV)</option>
+        <option value="WI">Wisconsin (WI)</option>
+        <option value="WY">Wyoming (WY)</option>
+      </Form.Select>
 
       <Form.Check
         className="mb-3"
@@ -226,10 +291,14 @@ TherapistForm.propTypes = {
     favorite: PropTypes.bool,
     city: PropTypes.string,
     state: PropTypes.string,
-    category_id: PropTypes.objectOf(PropTypes.object()).isRequired,
+    category_id: PropTypes.string,
+    created_on: PropTypes.string,
+    id: PropTypes.number,
   }),
 };
 
 TherapistForm.defaultProps = {
   obj: initialTherapistState,
 };
+
+export default TherapistForm;
