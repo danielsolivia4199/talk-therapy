@@ -36,3 +36,9 @@ body {
   align-items: center;
   margin-top: 20px;
 }
+
+#appointment-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
