@@ -28,9 +28,11 @@ export default function TherapistPage() {
 
   return (
     <div>
-      <Link href="/therapists/new" passHref>
-        <Button>Add A Therapist</Button>
-      </Link>
+      {user.is_therapist === true ? (
+        <Link href="/therapists/new" passHref>
+          <Button>Add A Therapist Card</Button>
+        </Link>
+      ) : null}
       {therapists.map((therapist) => (
         <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getAllTherapists} />
       ))}

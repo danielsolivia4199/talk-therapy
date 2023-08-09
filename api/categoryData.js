@@ -34,4 +34,4 @@ const getSingleCategory = (id) => new Promise((resolve, reject) => {
 export {
   getCategories,
   getSingleCategory,
-}
+};
