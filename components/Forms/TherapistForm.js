@@ -290,7 +290,7 @@ TherapistForm.propTypes = {
     favorite: PropTypes.bool,
     city: PropTypes.string,
     state: PropTypes.string,
-    category_id: PropTypes.string,
+    category_id: PropTypes.number,
     created_on: PropTypes.string,
     id: PropTypes.number,
   }),
