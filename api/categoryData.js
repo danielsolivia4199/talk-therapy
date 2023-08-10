@@ -1,4 +1,4 @@
-import { clientCredentials } from "../utils/client";
+import { clientCredentials } from '../utils/client';
 
 // GET Categories
 const getCategories = () => new Promise((resolve, reject) => {
@@ -31,7 +31,20 @@ const getSingleCategory = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getCategoryTherapists = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/therapists?orderBy="category_id"&equalTo="${id}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   getCategories,
   getSingleCategory,
+  getCategoryTherapists,
 };

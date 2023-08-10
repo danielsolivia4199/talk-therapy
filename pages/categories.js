@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getCategories } from '../api/categoryData';
-import { useAuth } from '../utils/context/authContext';
 import CategoryCard from '../components/CategoryCard';
+import { useAuth } from '../utils/context/authContext';
 
 // categories page
-function ShowCategories() {
+function CategoriesPage() {
   const { user } = useAuth();
   const [catData, setCatData] = useState([]);
   const getAllCategories = () => {
-    getCategories(user.id).then((data) => {
+    getCategories(user.uid).then((data) => {
       // eslint-disable-next-line no-console
       console.log('Fetched Categories:', data);
       setCatData(data);
@@ -20,17 +20,15 @@ function ShowCategories() {
 
   useEffect(() => {
     getAllCategories();
-  });
+  }, []);
 
   return (
-    <div className="text-center">
-      <div>
-        {catData.map((category) => (
-          <CategoryCard key={category.id} therapistObj={category} onUpdate={getAllCategories} />
-        ))}
-      </div>
+    <div>
+      {catData.map((category) => (
+        <CategoryCard key={category.id} catObj={category} onUpdate={getAllCategories} />
+      ))}
     </div>
   );
 }
 
-export default ShowCategories;
+export default CategoriesPage;
