@@ -11,6 +11,7 @@ import { createAppointment, updateAppointment } from '../../api/appointmentData'
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import 'react-datepicker/dist/react-datepicker.css';
 import { getTherapist } from '../../api/therapistData';
+import { useAuth } from '../../utils/context/authContext';
 
 const initialAppointmentState = {
   id: '',
@@ -27,7 +28,7 @@ const AppointmentForm = ({ obj }) => {
   const [appointmentFormInput, setAppointmentFormInput] = useState(initialAppointmentState);
   const [selectedDate, setSelectedDate] = useState(null);
   const router = useRouter();
-  // const { user } = useAuth();
+  const { user } = useAuth();
   // const time = new Date().toLocaleString('en-US', {
   //   year: 'numeric',
   //   month: '2-digit',
@@ -38,7 +39,7 @@ const AppointmentForm = ({ obj }) => {
     if (obj) {
       setAppointmentFormInput(obj);
     }
-  }, [obj]);
+  }, [obj, user]);
 
   useEffect(() => {
     getCategories().then(setTherapistCategories);
@@ -59,6 +60,7 @@ const AppointmentForm = ({ obj }) => {
     if (obj.id) {
       const appointmentUpdate = {
         id: appointmentFormInput.id,
+        user: user.id,
         therapist_id: appointmentFormInput.therapist_id,
         category_id: appointmentFormInput.category_id,
         service: appointmentFormInput.service,
@@ -70,6 +72,7 @@ const AppointmentForm = ({ obj }) => {
     } else {
       const appointment = {
         id: appointmentFormInput.id,
+        user: user.id,
         therapist_id: appointmentFormInput.therapist_id,
         category_id: appointmentFormInput.category_id,
         service: appointmentFormInput.service,
@@ -102,7 +105,6 @@ const AppointmentForm = ({ obj }) => {
           required
           value={appointmentFormInput.service}
           onChange={handleChange}
-          style={{ width: '400px' }}
         >
           <option>Choose A Service Type</option>
           <option value="AL">In Person</option>
