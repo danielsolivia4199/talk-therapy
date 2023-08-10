@@ -9,12 +9,11 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
 import { deleteAppointment } from '../api/appointmentData';
 import { getSingleCategory } from '../api/categoryData';
+import { getSingleTherapist } from '../api/therapistData';
 // import { getSingleTherapist } from '../api/therapistData';
 
 function AppointmentCard({
   id,
-  therapist_id,
-  category_id,
   service,
   day,
   time,
@@ -23,6 +22,7 @@ function AppointmentCard({
 }) {
   const { user } = useAuth();
   const [category, setCategory] = useState({});
+  const [therapists, setTherapists] = useState([]);
   const deleteThisAppointment = () => {
     if (window.confirm('Delete appointment?')) {
       deleteAppointment(id).then(() => onUpdate());
@@ -30,16 +30,17 @@ function AppointmentCard({
   };
 
   useEffect(() => {
-    getSingleCategory(category_id).then(setCategory);
-  }, [category_id]);
+    getSingleCategory(id).then(setCategory);
+    getSingleTherapist(id).then(setTherapists);
+  }, []);
 
   return (
-    <Card className="text-center" style={{ margin: '20px' }}>
+    <Card className="text-center" style={{ margin: '20px', width: '400px' }}>
       <Card.Header>Appointment for: {user.first_name} {user.last_name}</Card.Header>
       <Card.Body>
         <Card.Title>Service Type: {service}</Card.Title>
         <Card.Text>
-          <p>Therapist: {therapist_id.first_name}</p>
+          <p>Therapist: {therapists.first_name} {therapists.last_name}</p>
           <p>Day: {day}</p>
           <p>Time: {time}</p>
           <p>Date placed: {time_ordered}</p>
@@ -58,8 +59,8 @@ function AppointmentCard({
 
 AppointmentCard.propTypes = {
   id: PropTypes.number.isRequired,
-  therapist_id: PropTypes.object.isRequired,
-  category_id: PropTypes.object.isRequired,
+  // therapist_id: PropTypes.object.isRequired,
+  // category_id: PropTypes.object.isRequired,
   service: PropTypes.string.isRequired,
   day: PropTypes.number.isRequired,
   time: PropTypes.number.isRequired,

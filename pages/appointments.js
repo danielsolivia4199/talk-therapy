@@ -6,16 +6,18 @@ import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { getAppointments } from '../api/appointmentData';
 import AppointmentCard from '../components/AppointmentCard';
+import { useAuth } from '../utils/context/authContext';
 
 export default function ShowAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [category, setCategory] = useState('');
   const router = useRouter();
+  const { user } = useAuth();
 
   const getAllAppointments = () => {
-    getAppointments().then((data) => {
+    getAppointments(user.uid).then((data) => {
       setAppointments(data);
-      setCategory(data.category_id.label);
+      setCategory(data);
     });
   };
 

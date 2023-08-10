@@ -88,9 +88,9 @@ const AppointmentForm = ({ obj }) => {
       onSubmit={handleSubmit}
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
-        height: '90vh',
+        marginTop: '100px',
         padding: '30px',
-        maxWidth: '500px',
+        maxWidth: '600px',
         margin: '0 auto',
       }}
     >
@@ -102,6 +102,7 @@ const AppointmentForm = ({ obj }) => {
           required
           value={appointmentFormInput.service}
           onChange={handleChange}
+          style={{ width: '400px' }}
         >
           <option>Choose A Service Type</option>
           <option value="AL">In Person</option>
@@ -168,7 +169,7 @@ const AppointmentForm = ({ obj }) => {
         name="therapist_id"
         onChange={handleChange}
         value={appointmentFormInput.therapist_id}
-        style={{ marginBottom: '15px' }}
+        style={{ marginBottom: '20px' }}
       >
         <option value="">Select A Therapist</option>
         {
