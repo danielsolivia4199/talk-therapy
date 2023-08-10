@@ -36,3 +36,11 @@ body {
   align-items: center;
   margin-top: 20px;
 }
+
+.favorite-icon {
+  cursor: pointer;
+}
+
+.favorite-icon.favorited {
+  color: gold; /* Or your preferred color for favorited state */
+}

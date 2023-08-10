@@ -3,11 +3,8 @@ import { getTherapistsByCategory } from './therapistData';
 
 const viewCategoryDetails = (categoryid) => new Promise((resolve, reject) => {
   Promise.all([getSingleCategory(categoryid), getTherapistsByCategory(categoryid)])
-    .then((therapistObject) => {
-      getSingleCategory(therapistObject.category_id)
-        .then((categoryObject) => {
-          resolve({ categoryObject, ...therapistObject });
-        });
+    .then(([categoryObject, therapistObject]) => {
+      resolve({ ...categoryObject, therapists: therapistObject });
     }).catch((error) => reject(error));
 });
 
