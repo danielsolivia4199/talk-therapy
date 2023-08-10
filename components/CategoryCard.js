@@ -15,7 +15,7 @@ export default function CategoryCard({ catObj }) {
       <Card.Body>
         <Card.Title>{catObj.label}</Card.Title>
         <Link href={`/category/${catObj.id}`} passHref>
-          <Button variant="primary">Search</Button>
+          <Button variant="primary">See Therapists</Button>
         </Link>
 
       </Card.Body>
