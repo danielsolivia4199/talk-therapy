@@ -8,12 +8,8 @@ export default function ViewCategory() {
   const [categoryDetails, setCategoryDetails] = useState({});
   const router = useRouter();
   const { id } = router.query;
-
-  const getCategoryDetails = () => {
-    viewCategoryDetails(id).then(setCategoryDetails);
-  };
   useEffect(() => {
-    getCategoryDetails();
+    viewCategoryDetails(id).then(setCategoryDetails);
   }, [id]);
 
   return (
