@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 
 // category card component for the category page
-function CategoryCard({ catObj }) {
+export default function CategoryCard({ catObj }) {
   if (!catObj) {
     return null;
   }
@@ -14,21 +14,20 @@ function CategoryCard({ catObj }) {
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
         <Card.Title>{catObj.label}</Card.Title>
-        <p className="card-text bold">{catObj.description}</p>
-        <Link href={`/categories/${catObj.id}`} passHref>
-          <Button variant="primary">Search This Category</Button>
+        <Link href={`/category/${catObj.id}`} passHref>
+          <Button variant="primary">Search</Button>
         </Link>
+
       </Card.Body>
     </Card>
   );
 }
+// FIXME: If i comment out the link and button, the cards show up. I need to create the details page for the categories for this to work.
 
 CategoryCard.propTypes = {
   catObj: PropTypes.shape({
     label: PropTypes.string,
     description: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }).isRequired,
 };
-
-export default CategoryCard;
