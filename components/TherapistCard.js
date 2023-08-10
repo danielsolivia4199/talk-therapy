@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -9,10 +10,16 @@ import { getSingleCategory } from '../api/categoryData';
 
 export default function TherapistCard({ therapistObj, onUpdate }) {
   const [category, setCategory] = useState({});
+  const [isFavorite, setIsFavorite] = useState(therapistObj.favorite);
+
   const deleteThisTherapist = () => {
     if (window.confirm(`Delete ${therapistObj.first_name} ${therapistObj.last_name}?`)) {
       deleteTherapist(therapistObj.id).then(() => onUpdate());
     }
+  };
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
   };
 
   useEffect(() => {
@@ -23,6 +30,15 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
         <img src={therapistObj.profile_image_url} alt="user" width="100px" height="100px" />
+        <span
+          className={`favorite-icon ${isFavorite ? 'favorited' : ''}`}
+          onClick={handleFavoriteToggle}
+          role="button"
+          tabIndex={0}
+          aria-label={isFavorite ? 'Unfavorite' : 'Favorite'}
+        >
+          &#9733;
+        </span>
         <h2>
           {therapistObj.first_name} {therapistObj.last_name}
         </h2>

@@ -36,9 +36,16 @@ body {
   align-items: center;
   margin-top: 20px;
 }
-
 #appointment-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.favorite-icon {
+  cursor: pointer;
+}
+
+.favorite-icon.favorited {
+  color: gold; /* Or your preferred color for favorited state */
 }
