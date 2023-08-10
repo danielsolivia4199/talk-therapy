@@ -12,5 +12,12 @@ export default function EditTherapist() {
     getSingleTherapist(id).then(setEditItem);
   }, [id]);
 
-  return (<TherapistForm obj={editItem} />);
+  return (
+    <>
+      <h2 className="text-center" style={{ margin: '100px' }}>
+        Update Therapist
+      </h2>
+      <TherapistForm obj={editItem} />
+    </>
+  );
 }
