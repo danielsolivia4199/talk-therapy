@@ -88,18 +88,30 @@ const favoriteTherapists = (id) => new Promise((resolve, reject) => {
 });
 
 // FIXME: Get therapist by category
+// const getTherapistsByCategory = (id) => new Promise((resolve, reject) => {
+//   fetch(`${clientCredentials.databaseURL}/therapists`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const usersTherapists = Object.values(data).filter((item) => item.category_id.id === id);
+//       resolve(usersTherapists);
+//     })
+//     .catch(reject);
+// });
+
 const getTherapistsByCategory = (id) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/therapists`, {
+  fetch(`${clientCredentials.databaseURL}/therapists?orderBy="category_id"&equalTo="${id}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => {
-      const usersTherapists = Object.values(data).filter((item) => item.category_id.id === id);
-      resolve(usersTherapists);
-    })
+    .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
 
