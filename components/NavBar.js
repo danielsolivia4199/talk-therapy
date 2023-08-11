@@ -35,7 +35,7 @@ function NavBar() {
             </Form>
             <NavDropdown style={{ marginRight: '15px' }} title="Account" id="navbarScrollingDropdown">
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="/orderHistory">
+              <NavDropdown.Item href="/therapists/favorites">
                 Favorite Therapists
               </NavDropdown.Item>
               <NavDropdown.Divider />
