@@ -8,6 +8,7 @@ import { useAuth } from '../utils/context/authContext';
 function CategoriesPage() {
   const { user } = useAuth();
   const [catData, setCatData] = useState([]);
+
   const getAllCategories = () => {
     getCategories(user.uid).then((data) => {
       // eslint-disable-next-line no-console
