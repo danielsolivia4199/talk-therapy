@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import TherapistCard from '../../components/TherapistCard';
 import viewCategoryDetails from '../../api/categoryDetailData';
+import { getCategoryTherapists } from '../../api/categoryData';
 
 export default function ViewCategory() {
   const [categoryDetails, setCategoryDetails] = useState([]);
@@ -13,7 +14,6 @@ export default function ViewCategory() {
   };
   useEffect(() => {
     getByCategory();
-
   }, [id]);
   console.warn(categoryDetails);
 
@@ -24,7 +24,7 @@ export default function ViewCategory() {
       </div>
       <div className="d-flex flex-wrap">
         {categoryDetails.therapists?.map((therapist) => (
-          <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getTherapistsByCategory} />
+          <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getCategoryTherapists} />
         ))}
       </div>
     </div>
