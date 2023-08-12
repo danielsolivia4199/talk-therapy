@@ -32,7 +32,7 @@ const getSingleCategory = (id) => new Promise((resolve, reject) => {
 });
 
 const getCategoryTherapists = (id) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/therapists?orderBy="category_id"&equalTo="${id}"`, {
+  fetch(`${clientCredentials.databaseURL}/therapists?category_id=${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -66,7 +66,7 @@ TherapistCard.propTypes = {
     last_name: PropTypes.string,
     email: PropTypes.string,
     description: PropTypes.string,
-    uid: PropTypes.string,
+    uid: PropTypes.number,
     profile_image_url: PropTypes.string,
     favorite: PropTypes.bool,
     city: PropTypes.string,

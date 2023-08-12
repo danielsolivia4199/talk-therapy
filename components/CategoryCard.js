@@ -22,7 +22,6 @@ export default function CategoryCard({ catObj }) {
     </Card>
   );
 }
-// FIXME: If i comment out the link and button, the cards show up. I need to create the details page for the categories for this to work.
 
 CategoryCard.propTypes = {
   catObj: PropTypes.shape({
