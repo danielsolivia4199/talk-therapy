@@ -1,21 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { StarFill } from 'react-bootstrap-icons'; // Import the star icon
 import { deleteTherapist } from '../api/therapistData';
 import { getSingleCategory } from '../api/categoryData';
-import { useAuth } from '../utils/context/authContext';
 
 export default function TherapistCard({ therapistObj, onUpdate }) {
-  const { user } = useAuth();
   const [category, setCategory] = useState({});
+  const [isFavorite, setIsFavorite] = useState(therapistObj.favorite);
+
   const deleteThisTherapist = () => {
     if (window.confirm(`Delete ${therapistObj.first_name} ${therapistObj.last_name}?`)) {
       deleteTherapist(therapistObj.id).then(() => onUpdate());
     }
+  };
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
   };
 
   useEffect(() => {
@@ -26,26 +30,30 @@ export default function TherapistCard({ therapistObj, onUpdate }) {
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
         <img src={therapistObj.profile_image_url} alt="user" width="100px" height="100px" />
+        <span
+          className={`favorite-icon ${isFavorite ? 'favorited' : ''}`}
+          onClick={handleFavoriteToggle}
+          role="button"
+          tabIndex={0}
+          aria-label={isFavorite ? 'Unfavorite' : 'Favorite'}
+        >
+          &#9733;
+        </span>
         <h2>
           {therapistObj.first_name} {therapistObj.last_name}
         </h2>
         <h3>{category.label}</h3>
         <h5>{therapistObj.city}, {therapistObj.state}</h5>
-        {therapistObj.favorite && <StarFill color="gold" size={14} />} {/* Render star if favorited */}
         <p>{therapistObj.description}</p>
         <Link href={`/therapists/${therapistObj.id}`} passHref>
           <Button variant="primary" className="m-2">Details</Button>
         </Link>
         <Link href={`/therapists/edit/${therapistObj.id}`} passHref>
-          <Button variant="warning">{user.is_therapist === true
-            ? 'Edit' : 'Favorite'}
-          </Button>
+          <Button variant="info">Edit</Button>
         </Link>
-        {user.is_therapist && (
-          <Button variant="danger" onClick={deleteThisTherapist} className="m-2">
-            Delete
-          </Button>
-        )}
+        <Button variant="danger" onClick={deleteThisTherapist} className="m-2">
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );

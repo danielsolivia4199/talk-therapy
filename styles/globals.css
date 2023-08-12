@@ -42,6 +42,18 @@ body {
   justify-content: center;
 }
 
+#therapist-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#category-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .favorite-icon {
   cursor: pointer;
 }

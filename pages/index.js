@@ -1,16 +1,25 @@
 // import { useState } from 'react';
 
+import { useEffect, useState } from 'react';
+import { getCategories } from '../api/categoryData';
+import CategoryCard from '../components/CategoryCard';
+
 function Home() {
-  // const [categories, setCategories] = useState([]);
+  const [catData, setCatData] = useState([]);
+  const getAllCategories = () => {
+    getCategories().then((data) => {
+      // eslint-disable-next-line no-console
+      console.log('Fetched Categories:', data);
+      setCatData(data);
+    })
+      .catch((error) => {
+        console.error('Unable to fetch Categories:', error);
+      });
+  };
 
-  // const getAllCategories = () => {
-  //   getCategories().then(setCategories);
-  // };
-
-  // useEffect(() => {
-  //   getAllCategories();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
   return (
     <>
@@ -23,11 +32,11 @@ function Home() {
         <img src="https://greenane.ie/wp-content/uploads/2021/08/Adolescent-Trauma.png" alt="therapy" />
 
       </div>
-      {/* <div id="category-section" className="text-center my-4 d-flex">
-        {categories.map((category) => (
-          <CategoryCard key={category.id} id={category.id} label={category.label} categoryObj={category} onUpdate={getAllCategories} />
+      <div id="category-section" className="text-center my-4 d-flex">
+        {catData.map((category) => (
+          <CategoryCard key={category.id} catObj={category} onUpdate={getAllCategories} />
         ))}
-      </div> */}
+      </div>
     </>
   );
 }
