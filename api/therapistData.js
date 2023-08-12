@@ -72,8 +72,8 @@ const deleteTherapist = (id) => new Promise((resolve, reject) => {
 });
 
 // Get therapist by favorite
-const favoriteTherapists = (id) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/therapists/${id}`, {
+const favoriteTherapists = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/therapists?uid=${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const favoriteTherapists = (id) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const favorites = Object.values(data).filter((item) => item.favorite);
+      const favorites = Object.values(data).filter((therapist) => therapist.favorite);
       resolve(favorites);
     })
     .catch(reject);
