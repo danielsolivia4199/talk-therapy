@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // import { useState } from 'react';
 
 import { useEffect, useState } from 'react';
@@ -31,6 +32,10 @@ function Home() {
       >
         <img src="https://greenane.ie/wp-content/uploads/2021/08/Adolescent-Trauma.png" alt="therapy" />
 
+      </div>
+      <div>
+        <h1 id="category-section" style={{ marginTop: '50px' }}>Our Mission</h1>
+        <p className="text-center my-4 d-flex" style={{ marginLeft: '50px', marginRight: '50px' }}>Making professional therapy accessible, affordable, and convenient — so anyone who struggles with life's challenges can get help, anytime and anywhere.</p>
       </div>
       <div id="category-section" className="text-center my-4 d-flex">
         {catData.map((category) => (
