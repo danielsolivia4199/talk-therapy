@@ -24,6 +24,7 @@ export default function TherapistPage() {
 
   useEffect(() => {
     getAllTherapists();
+    console.warn(getAllTherapists);
   }, []);
 
   return (

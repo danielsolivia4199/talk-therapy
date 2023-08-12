@@ -8,12 +8,20 @@ export default function ViewCategory() {
   const [categoryDetails, setCategoryDetails] = useState({});
   const router = useRouter();
   const { id } = router.query;
-  useEffect(() => {
+  const getByCategory = () => {
     viewCategoryDetails(id).then(setCategoryDetails);
+  };
+
+  useEffect(() => {
+    getByCategory();
   }, [id]);
+  console.warn(categoryDetails);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
+      <div>
+        <h5>{categoryDetails.label}</h5>
+      </div>
       <div className="d-flex flex-wrap">
         {categoryDetails.therapists?.map((therapist) => (
           <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getTherapistsByCategory} />
