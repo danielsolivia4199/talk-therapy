@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { getCategories } from '../api/categoryData';
 import CategoryCard from '../components/CategoryCard';
 import { useAuth } from '../utils/context/authContext';
@@ -24,9 +25,19 @@ function CategoriesPage() {
 
   return (
     <div>
-      {catData.map((category) => (
-        <CategoryCard key={category.id} catObj={category} onUpdate={getAllCategories} />
-      ))}
+      <Head>
+        <title>Categories</title>
+      </Head>
+      <img src="https://res.cloudinary.com/nowandme/image/upload/f_auto/blog/jetet09edszqs1x3bqv7" alt="hero" style={{ width: '100%' }} />
+      <div className="text-center my-4" style={{ marginTop: '100px' }}>
+        <h1>Categories</h1>
+      </div>
+      <div id="category-section">
+        {catData.map((category) => (
+          <CategoryCard key={category.id} catObj={category} onUpdate={getAllCategories} />
+        ))}
+      </div>
+
     </div>
   );
 }

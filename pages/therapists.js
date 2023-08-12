@@ -2,6 +2,7 @@
 import { React, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import Head from 'next/head';
 import { getTherapist } from '../api/therapistData';
 import { useAuth } from '../utils/context/authContext';
 import TherapistCard from '../components/TherapistCard';
@@ -28,14 +29,23 @@ export default function TherapistPage() {
 
   return (
     <div>
-      {user.is_therapist === true ? (
-        <Link href="/therapists/new" passHref>
-          <Button>Add A Therapist Card</Button>
-        </Link>
-      ) : null}
-      {therapists.map((therapist) => (
-        <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getAllTherapists} />
-      ))}
+      <Head>
+        <title>Categories</title>
+      </Head>
+      <img src="https://media.istockphoto.com/id/1304726157/vector/psychotherapy-counseling-and-mental-health.jpg?s=612x612&w=0&k=20&c=qHeXkRmiYWDeG5Oyq_zXsVQ3hsRdsOfLGaiqqrHNBDM=" alt="hero" style={{ width: '100%' }} />
+      <div className="text-center my-4" style={{ marginTop: '100px' }}>
+        {user.is_therapist === true ? (
+          <Link href="/therapists/new" passHref>
+            <Button>Add A Therapist Card</Button>
+          </Link>
+        ) : null}
+      </div>
+      <div id="therapist-section">
+        {therapists.map((therapist) => (
+          <TherapistCard key={therapist.id} therapistObj={therapist} onUpdate={getAllTherapists} />
+        ))}
+      </div>
+
     </div>
   );
 }
